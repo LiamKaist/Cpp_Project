@@ -1,0 +1,17 @@
+CC = g++
+CFLAGS = -Wall -Wextra -pedantic -std=c++11
+LDFLAGS = -lpthread
+
+SRC = server_linux.cpp http_tcpServer_linux.cpp
+OBJ = $(SRC:.cpp=.o)
+
+all: server_linux
+
+server_linux: $(OBJ)
+	$(CC) $(OBJ) $(LDFLAGS) -o server_linux
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ) server_linux
