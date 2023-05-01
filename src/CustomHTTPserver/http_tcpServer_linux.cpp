@@ -131,6 +131,8 @@ namespace http
     void TcpServer::sendResponse()
     {
         long bytesSent;
+        std::string size = std::to_string(m_serverMessage.size());
+        bytesSent =  write(new_socket, (size).c_str(), 3);
         bytesSent = write(new_socket, m_serverMessage.c_str(), m_serverMessage.size());
         if (bytesSent == m_serverMessage.size())
         {
