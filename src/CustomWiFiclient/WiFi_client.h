@@ -12,17 +12,17 @@ namespace customwificlient
 
             CustomWiFiClient(std::string hostAddress,long hostPort); //IPaddress and port initialized here
             ~CustomWiFiClient();
-            
+            std::string IPaddress;
             void connectToHost();
             std::string retrieveMessage();
 
         private:
 
-            std::string IPaddress;
+            
             long port;
             std::string incomingMessage;
             int incomingSize;
-            WiFiClient * client;
+            char * buf; //Buffer to retrieve messages
     };
 }
 

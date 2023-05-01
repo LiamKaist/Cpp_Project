@@ -3,11 +3,14 @@
 
 namespace customwificlient
 {
-    CustomWiFiClient::CustomWiFiClient(std::string hostAddress,long hostPort)
+    
+    CustomWiFiClient::CustomWiFiClient(std::string hostAddress,long hostPort): WiFiClient()
     {
+       
         this->IPaddress= hostAddress;
         this->port = hostPort;
-        this->client = new WiFiClient();
+        this->buf = new char[3];
+        
     }
 
     CustomWiFiClient::~CustomWiFiClient()
@@ -18,21 +21,31 @@ namespace customwificlient
 
     void CustomWiFiClient::connectToHost()
     {
-        this->client->connect((this->IPaddress).c_str(),this->port);
+        while(WiFiClient::connect("192.168.101.28",8080) == false)
+        { Serial.println("Waiting...");}
+        
+        WiFiClient::write(1);
+            
     }
 
-    std::string CustomWiFiClient::retrieveMessage()
-    {
-        std::ostringstream ss;
-        this->client->write(1); //To receive the message from my own server 
-        char buf1[3]= {0};
-        this->client->read(buf1,3);
-        this->incomingSize = std::stoi(buf1);
+    std::string CustomWiFiClient::retrieveMessage() {
 
-        char buf[incomingSize]= {0};
-        this->client->read(buf,incomingSize);
-        ss << buf;
-        return ss.str();
+        if(WiFiClient::available())
+        {
+            WiFiClient::read(buf, 3);
+            this->incomingSize = std::stoi(buf);
+            char* new_buf = new char[incomingSize];
+            memset(new_buf, 0, incomingSize); // initialize new buffer to all zeros
+            WiFiClient::read(new_buf, incomingSize);
+            std::string message(new_buf, incomingSize);
+            delete[] buf; // delete old buffer after allocating new one
+            buf = new_buf;
+            return message;
+        }else{
+            std::string message("Unavailable");
+            return message;
+        }
+        
         
     }
 
