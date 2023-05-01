@@ -21,7 +21,7 @@ namespace customwificlient
 
     void CustomWiFiClient::connectToHost()
     {
-        while(WiFiClient::connect("192.168.101.28",8080) == false)
+        while(WiFiClient::connect(this->IPaddress,this->port) == false)
         { Serial.println("Waiting...");}
         
         WiFiClient::write(1);
