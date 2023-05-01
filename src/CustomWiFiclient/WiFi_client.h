@@ -22,7 +22,7 @@ namespace customwificlient
             long port;
             std::string incomingMessage;
             int incomingSize;
-            WiFiCLient * client;
+            WiFiClient * client;
     };
 }
 

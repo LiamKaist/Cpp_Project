@@ -7,9 +7,11 @@ int main()
     try
     {
         TcpServer server =TcpServer("0.0.0.0",8080);
+        server.~TcpServer();
     }catch(HTTPerror err){
         std::cerr<< "Runtime problem" << std::endl;
     }
+    
     
     return 0;
 }

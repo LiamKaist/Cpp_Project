@@ -18,7 +18,7 @@ namespace customwificlient
 
     void CustomWiFiClient::connectToHost()
     {
-        this->client->connect(this->IPaddress,this->port);
+        this->client->connect((this->IPaddress).c_str(),this->port);
     }
 
     std::string CustomWiFiClient::retrieveMessage()
