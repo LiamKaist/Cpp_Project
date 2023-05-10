@@ -36,8 +36,3 @@ void Pump::sendSignal(){
 
 }
 
-void Pump::activatePump(){
-
-    std::cout<<"In activatePump()"; 
-
-}
