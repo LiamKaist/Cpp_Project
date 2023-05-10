@@ -22,10 +22,6 @@ class Pump:public Actuator{
 
     void sendSignal();
 
-    void activatePump();
-
-
-
 };
 
 
