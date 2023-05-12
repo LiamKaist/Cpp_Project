@@ -24,8 +24,7 @@ namespace customwificlient
         while(WiFiClient::connect(this->IPaddress,this->port) == false)
         { Serial.println("Waiting...");}
         
-        WiFiClient::write(1);
-            
+        WiFiClient::write(1); 
     }
 
     std::string CustomWiFiClient::retrieveMessage() {

@@ -14,7 +14,7 @@ namespace http
     class TcpServer
     {
     public: 
-        TcpServer(std::string ip_address, int port);
+        TcpServer(std::string ip_address, int port, int choice);
         ~TcpServer();
         
 
@@ -33,7 +33,7 @@ namespace http
         void startListen();
         void acceptConnection();
         void readIncoming();
-        std::string buildResponse();
+        std::string buildResponse(int choice);
         void sendResponse();
         
 

@@ -1,5 +1,3 @@
 Detecting language using up to the first 30 seconds. Use `--language` to specify the language
-Detected language: English
-[00:00.000 --> 00:08.000]  Hello, I really like this cafe and I would like a cup of 100 millilitres of coffee, please.
-
-Hello Liam, just checking if the connection does, in fact, work.
+Detected language: French
+[00:00.000 --> 00:04.280]  Il y a des temps d'observation à chaque instant et on voit les gens qui l'identifient.

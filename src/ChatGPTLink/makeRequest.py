@@ -9,7 +9,7 @@ import json
 #Access text provided by the command line
 filePath= sys.argv[1]
 
-openai.api_key = "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"  #This key was obtained via OpenAI's API website, I am being charged money for each token my requests consume
+openai.api_key = "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"  #This key was obtained via OpenAI's API website, I am being charged money for each token my requests consume
 fd=open(filePath,'r')
 gatheredText=fd.read()
 

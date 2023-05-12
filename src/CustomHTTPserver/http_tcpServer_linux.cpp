@@ -6,10 +6,10 @@
 
 namespace http
 {
-    TcpServer::TcpServer(std::string ip_address, int port)
+    TcpServer::TcpServer(std::string ip_address, int port ,int choice)
     :m_ip_address(ip_address),m_port(port),m_socket(),m_incomingMessage()
     ,m_socketAddress(),m_socketAddress_len(sizeof(m_socketAddress))
-    ,m_serverMessage(buildResponse())
+    ,m_serverMessage(buildResponse(choice))
     {
         //Initializing the sockaddr object
         m_socketAddress.sin_family = AF_INET; 
@@ -91,7 +91,7 @@ namespace http
     }
 
 
-    std::string TcpServer::buildResponse()
+    std::string TcpServer::buildResponse(int choice)
     {
         /*std::string htmlFile = "<!DOCTYPE html><html lang=\"en\"><body><h1> HOME </h1><p> Hello from your Server :) </p></body></html>";
         std::ostringstream ss;
@@ -103,26 +103,47 @@ namespace http
         std::ostringstream ss;
         std::string myLine;
 
-        myFile_Handler.open("../MP4Transfer/file.txt");
-        ss << "HTTP/1.1 200 OK\n";
-        if(myFile_Handler.is_open())
-        {
-        // Keep reading the file
-        while(getline(myFile_Handler, myLine))
-        {
-            // print the line on the standard output
-            ss << myLine << std::endl;
-        }
-        // File Close
-        myFile_Handler.close();
-        }
-        else
-        {
+        if (choice == 1){ //To get the volume requested
+            myFile_Handler.open("../MP4Transfer/Finalfile.txt");
+            if(myFile_Handler.is_open())
+            {
+            // Keep reading the file
+            while(getline(myFile_Handler, myLine))
+            {
+                // print the line on the standard output
+                ss << myLine << std::endl;
+            }
+            // File Close
+            myFile_Handler.close();
+            }
+            else
+            {
+                HTTPerror error(7);
+                throw(error);
+            }
+        } else if (choice == 2) { // TO get the text from chatGPT
+            myFile_Handler.open("../MP4Transfer/file.txt");
+            if(myFile_Handler.is_open())
+            {
+            // Keep reading the file
+            while(getline(myFile_Handler, myLine))
+            {
+                // print the line on the standard output
+                ss << myLine << std::endl;
+            }
+            // File Close
+            myFile_Handler.close();
+            }
+            else
+            {
+                HTTPerror error(7);
+                throw(error);
+            }
+        } else {
             HTTPerror error(7);
             throw(error);
         }
         return ss.str();
-
     }
 
 
