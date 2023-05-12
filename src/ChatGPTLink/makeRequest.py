@@ -18,8 +18,8 @@ gatheredText=fd.read()
 response=openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
-        {"role": "system", "content": "You can only answer with numbers 100, 200 or 300"},
-        {"role": "user", "content":  "Tell me precisely how many millilitres of water this person wants (either 100, 200 or 300), if they want anything other than 100,200 or 300 mL, just answer 300: " + gatheredText}
+        {"role": "system", "content": "You can only answer with numbers 0, 100, 200 or 300"},
+        {"role": "user", "content":  "Tell me precisely how many millilitres of any kind of drink this person wants (either 100, 200 or 300), if they seem thirsty give them 300, if they don't seem too thirsty give them 100. If they specifically say medium, answer 200, if they don't want a drink answer 0: " + gatheredText}
     ]
 )
 
