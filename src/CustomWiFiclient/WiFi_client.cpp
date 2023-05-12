@@ -21,16 +21,23 @@ namespace customwificlient
 
     void CustomWiFiClient::connectToHost()
     {
-        while(WiFiClient::connect(this->IPaddress,this->port) == false)
+        while(WiFiClient::connect(IPaddress.c_str(),port) == false)
         { Serial.println("Waiting...");}
         
-        WiFiClient::write(1); 
+        WiFiClient::write(1);
+            
     }
 
     std::string CustomWiFiClient::retrieveMessage() {
 
-        if(WiFiClient::available())
+        
+        // Waiting for message availability
+        unsigned long previousMillis = millis();
+        while((!WiFiClient::available()) && (millis()-previousMillis < 3000) )
         {
+            delay(3000);
+        }
+        if (WiFiClient::available()){
             WiFiClient::read(buf, 3);
             this->incomingSize = std::stoi(buf);
             char* new_buf = new char[incomingSize];
@@ -41,11 +48,8 @@ namespace customwificlient
             buf = new_buf;
             return message;
         }else{
-            std::string message("Unavailable");
-            return message;
+            return "ServerTimeOut";
         }
-        
-        
     }
 
 

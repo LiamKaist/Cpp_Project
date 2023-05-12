@@ -29,24 +29,4 @@ namespace customwificlient
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif
