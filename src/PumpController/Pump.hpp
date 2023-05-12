@@ -4,32 +4,16 @@
 #include "Actuator.hpp"
 #include <stdint.h>
 
-
 class Pump:public Actuator{
 
     private:
     uint8_t pin;
-    double duration;
-    unsigned long previousMillis;
-    unsigned long interval;
-    unsigned long currentMillis;
+    void sendSignal(unsigned long durationMs);
 
-  
     public:
-
-    Pump();
     Pump(uint8_t);
-
     void sendSignal();
-
-    void activatePump();
-
-
-
+    void dispenseLiquid(unsigned long volume);
 };
-
-
-
-
 
 #endif

@@ -6,38 +6,27 @@
 #include <iostream>
 
 
-Pump::Pump(){
-
-}
-
-
 //Instantiate the pump with its pin , set to OUTPUT Mode
 Pump::Pump(uint8_t pin){
     pinMode(pin,OUTPUT);
     this->pin= pin;
-    this->previousMillis=0UL;
-    this->interval = 7250UL;
 }
 
+//Basic signal testing 
 void Pump::sendSignal(){
-
-    std::cout<<"In sendSignal()";
     digitalWrite(this->pin,HIGH);
-
-    this->previousMillis=millis();
-    while(millis() < this->previousMillis + this->interval){yield();} //Yield is used to reset the watchdog timer, it could be possible to change the watchdog timer's threshold}
-
-
+    delay(1000);
     digitalWrite(this->pin,LOW);
-    
-    //More timing precision using millis()
-    this->previousMillis=millis();
-    while(millis() < this->previousMillis + this->interval){yield();}
-
 }
 
-void Pump::activatePump(){
-
-    std::cout<<"In activatePump()"; 
-
+void Pump::sendSignal(unsigned long durationMs){
+    digitalWrite(this->pin,HIGH);
+    delay(durationMs);
+    digitalWrite(this->pin,LOW);
 }
+
+void Pump::dispenseLiquid(unsigned long volume){
+    unsigned long computedDuration = volume*(7250/300);
+    Pump::sendSignal(computedDuration);
+}
+
