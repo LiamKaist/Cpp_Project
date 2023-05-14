@@ -1,30 +1,27 @@
 
 
-#include <Oled.hpp>
+#include <Oled.h>
 
 using namespace std;
-Oled::Oled(const u8g2_cb_t *r,uint8_t clockie,uint8_t data,uint8_t reset): U8G2_SH1107_SEEED_128X128_1_SW_I2C(r,clockie,data,reset)
-{this->initOK=1;}
-
-void Oled::diagDraw(void){
-    
-    Oled::drawBox(1,1,10,10);
-    Oled::drawBox(11,11,10,10);
-    Oled::drawBox(21,21,10,10);
-    Oled::drawBox(31,31,10,10);
-    Oled::drawBox(41,41,10,10);
-    Oled::drawBox(51,51,10,10);
-    Oled::drawBox(61,61,10,10);
+Oled::Oled(const u8g2_cb_t *r,uint8_t clockie,uint8_t data,uint8_t reset): U8G2_SH1107_SEEED_128X128_1_SW_I2C(r,clockie,data,reset){
 
 }
 
+
+void Oled::displayData(){
+    Oled::sentenceWrite("No data to display",15,10);
+}
+
+void Oled::retrieveData(){
+    Oled::sentenceWrite("No data to receive",15,10);
+}
 
 void Oled::sentenceWrite(string sentence, int maxLen, unsigned long speed){
     
     list<string> sentenceList;
     //Use of STL list library to display on Oled
     int i;
-    for (i=0; i<sentence.size(); i++){
+    for (i=0; i<sentence.size(); i=i+speed){
 
         if (i+maxLen < sentence.size()){
             sentenceList.push_back(sentence.substr(i, maxLen));
@@ -39,10 +36,10 @@ void Oled::sentenceWrite(string sentence, int maxLen, unsigned long speed){
     for (it = sentenceList.begin(); it != sentenceList.end(); ++it){
         Oled::firstPage();
         do {
-            Oled::setFont(u8g2_font_ncenB10_tr);
+            Oled::setFont(u8g2_font_fub11_tf);
             Oled::drawStr(0,24, (*it).c_str());
         } while ( Oled::nextPage() );
-        delay(speed);
+        delay(10);
     }
     Oled::clearDisplay();
 
@@ -57,5 +54,5 @@ string Oled::removeSpaces(string sentence){
 
 void Oled::operator<< (const string & sentence)
 {
-    Oled::sentenceWrite(sentence,14,1);
+    Oled::sentenceWrite(sentence,18,4);
 }
