@@ -43,7 +43,7 @@ Pompe à eau immergée Lextronic
 
 ### Description des classes. 
 
-- ```SENSOR CLASS```
+- ```SENSOR```
 
 La classe Sensor est déclarée dans le fichier Sensor.hpp et a un attribut statique :
 
@@ -54,7 +54,7 @@ La classe Sensor est une classe abstraite, ce qui signifie qu'elle a deux métho
 ```virtual void retrieveData()=0``` : récupère les données du capteur.
 La classe Sensor a un constructeur par défaut, ```Sensor()```, qui incrémente la variable statique sensorNbr chaque fois qu'un objet Sensor est créé.
 
-- ```Pump```
+- ```PUMP```
 
 La classe Pump est déclarée dans le fichier Pump.hpp avec les attributs suivants :
 
