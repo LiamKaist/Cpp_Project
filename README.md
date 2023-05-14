@@ -19,21 +19,13 @@ Le système de distributeur automatique d'eau fonctionne de la manière suivante
 
 5/ La carte électronique traite l'information et fournit une commande à une pompe pour fournir l'eau dans un gobelet.
 
-- Hardware du système : 
+- Hardware : 
 
-Carte ESP Arduino 
-
-Capteur de niveau Grove 
-
-Afficheur OLED Grove 
-
-Pompe à eau immergée Lextronic 
+Carte ESP [Arduino] / Capteur de niveau [Grove] / Afficheur OLED [Grove] / Pompe à eau immergée [Lextronic] 
 
 ### Schéma de principe du système. 
 
 ![image](Schema_principe.png)
-
-
 
 ## Description technique. 
 
