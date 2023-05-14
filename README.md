@@ -21,8 +21,7 @@ Le système de distributeur automatique d'eau fonctionne de la manière suivante
 
 ### Schéma de principe du système. 
 
-![Alt text](/home/courand/Bureau/CPP/Schema_principe.png "Optional title")
-
+file:///home/courand/Bureau/CPP/Schema_principe.png
 ## Description technique. 
 
 ### Diagramme de cas d'utilisation. 
