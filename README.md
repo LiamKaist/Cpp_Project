@@ -55,7 +55,7 @@ La classe Sensor est une classe abstraite, ce qui signifie qu'elle a deux métho
 La classe Sensor a un constructeur par défaut, ```Sensor()```, qui incrémente la variable statique sensorNbr chaque fois qu'un objet Sensor est créé.
 
 - ```Pump```
-- 
+
 La classe Pump est déclarée dans le fichier Pump.hpp avec les attributs suivants :
 
 ```uint8_t pin```: le numéro de la broche à laquelle la pompe est connectée.
