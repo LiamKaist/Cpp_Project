@@ -1,10 +1,7 @@
 //Includes
 #include <WiFi_client.h>
-#include <iostream>
-#include <U8g2lib.h>
-#include <Oled.hpp>
-#include <list>
-#include <Pump.hpp>
+#include <Oled.h>
+#include <Pump.h>
 #include <WaterLevelSensor.h>
 
 using namespace std;
@@ -62,10 +59,9 @@ void setup() {
   //Mise en place du bus I2C
   Wire.begin();
   WLsensor->begin(Wire); //Wire est créé dans Wire.h
-  WLsensor->calibrate();
   oledDisplay.begin();
   //Tentative de calibration du capteur de niveau d'eau lorsque le bac est vide
-  WLsensor->calibrate();
+  //WLsensor->calibrate();
 }
 
 void loop() {
@@ -91,10 +87,9 @@ void loop() {
   client2->connectToHost();
   incomingMessage=client2->retrieveMessage();
   oledDisplay<<incomingMessage;
-  
-  //Vérification du niveau d'eau après la commande
   int percentage;
   percentage=WLsensor->getPercentage();
+  oledDisplay<< "Water Level :" + to_string(percentage) + "%";
   if (percentage < 10){
     oledDisplay<<"Warning! WATERLEVELLOW";
   }
