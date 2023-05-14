@@ -49,6 +49,18 @@ La classe Sensor est une classe abstraite, ce qui signifie qu'elle a deux métho
 
 La classe Sensor a un constructeur par défaut, ```Sensor()```, qui incrémente la variable statique sensorNbr chaque fois qu'un objet Sensor est créé.
 
+- ```ACTUATOR```
+
+La classe Actuator est déclarée dans le fichier Actuator.hpp et a un attribut statique :
+
+```static int actuatorNbr``` : le nombre total d'actionneurs créés jusqu'à présent.
+
+La classe Actuator est une classe abstraite, ce qui signifie qu'elle a une méthode virtuelle pure non implémentée :
+
+```virtual void sendSignal()=0``` : envoie un signal à l'actionneur.
+
+La classe Actuator a un constructeur par défaut, ```Actuator()```, qui incrémente la variable statique actuatorNbr chaque fois qu'un objet Actuator est créé.
+
 - ```PUMP```
 
 La classe Pump est déclarée dans le fichier Pump.hpp avec les attributs suivants :
