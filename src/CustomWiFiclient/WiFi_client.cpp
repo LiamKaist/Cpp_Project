@@ -21,13 +21,14 @@ namespace customwificlient
 
     void CustomWiFiClient::connectToHost()
     {   
-        unsigned long previousMillis = millis();
-        while((WiFiClient::connect(IPaddress.c_str(),port) == false) && (millis()-previousMillis < 3000))
-        { Serial.println("Waiting...");}
+        while((WiFiClient::connect(IPaddress.c_str(),port) == false))
+        { 
+            Serial.println("Waiting...");
 
-        if (WiFiClient::connect(IPaddress.c_str(),port) == true){
-            WiFiClient::write(1);
+            
         }
+
+        WiFiClient::write(1);
     }
 
     std::string CustomWiFiClient::retrieveMessage() {
