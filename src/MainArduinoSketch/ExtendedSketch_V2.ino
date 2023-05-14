@@ -43,9 +43,6 @@ Oled  oledDisplay(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN
 
 void setup() {
   Serial.begin(115200);
-  Serial.println();
-  oledDisplay.begin();
-
   // Configuration d'une addresse IP statique pour l'ESP8266
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("STA Failed to configure");
@@ -62,6 +59,11 @@ void setup() {
     delay(500);
     Serial.println(".");
   }
+  //Mise en place du bus I2C
+  Wire.begin();
+  WLsensor->begin(Wire); //Wire est créé dans Wire.h
+  WLsensor->calibrate();
+  oledDisplay.begin();
   //Tentative de calibration du capteur de niveau d'eau lorsque le bac est vide
   WLsensor->calibrate();
 }
