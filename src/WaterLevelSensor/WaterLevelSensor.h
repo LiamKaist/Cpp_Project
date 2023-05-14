@@ -1,27 +1,27 @@
 #ifndef WATERLEVELSENSOR_H
 #define WATERLEVELSENSOR_H
 
-#include <Sensor.hpp>
+#include <Sensor.h>
 #include <Wire.h>
 #include <iostream>
-
 
 class WaterLevelSensor : public Sensor {
 
     public :
 
         WaterLevelSensor();
-        void displayData();
+        ~WaterLevelSensor();
         int getPercentage();
-        void calibrate();
+        void begin(TwoWire &I2Cpipe);
         
     private :
         void getLow8SectionValue();
         void getHigh12SectionValue();
         void retrieveData();
         unsigned long waterLevel;
-        unsigned char low_data[8];
-        unsigned char high_data[12];
+        unsigned char * low_data;
+        unsigned char * high_data;
+        TwoWire dataBus;
 };
 
 

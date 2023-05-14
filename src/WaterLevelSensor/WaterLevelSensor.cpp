@@ -2,54 +2,61 @@
 
 
 WaterLevelSensor::WaterLevelSensor(){
-    Wire.begin();
-    waterLevel = 0;
+  waterLevel = 0;
+  low_data = new unsigned char[8];
+  high_data = new unsigned char[12];
 }
 
-void WaterLevelSensor::displayData(){
-
+//Connect the sensor to the I2C wire object in Wire.h
+void WaterLevelSensor::begin(TwoWire &I2Cpipe){
+  dataBus=I2Cpipe;
 }
+
+WaterLevelSensor::~WaterLevelSensor(){
+  delete low_data;
+  delete high_data;
+}
+
 
 void WaterLevelSensor::retrieveData(){
-
+  WaterLevelSensor::getLow8SectionValue();
+  WaterLevelSensor::getHigh12SectionValue();
 }
 
 void WaterLevelSensor::getHigh12SectionValue()
 {
-  memset(high_data, 0, sizeof(high_data));
-  Wire.requestFrom(0x78, 12);
-  while (12 != Wire.available());
+  //Requesting 12 bytes of data at address 0x78
+  dataBus.requestFrom(0x78, 12);
+  while (12 != dataBus.available());
 
   for (int i = 0; i < 12; i++) {
-    high_data[i] = Wire.read();
+    high_data[i] = dataBus.read();
   }
-  delay(10);
+  delay(10); 
 }
 
 
 void WaterLevelSensor::getLow8SectionValue()
 {
-  memset(low_data, 0, sizeof(low_data));
-  Wire.requestFrom(0x77, 8);
-  while (8 != Wire.available());
+  //Requesting 8 bytes of data at address 0x78
+  dataBus.requestFrom(0x77, 8);
+  while (8 != dataBus.available());
 
   for (int i = 0; i < 8 ; i++) {
-    low_data[i] = Wire.read(); // receive a byte as character
+    low_data[i] = dataBus.read(); // receive a byte as character
   }
-  delay(10);
+  delay(10); //Delay to prevent stack errors
 }
 
 int WaterLevelSensor::getPercentage(){
     
-    WaterLevelSensor::getLow8SectionValue();
-    WaterLevelSensor::getHigh12SectionValue();
+    WaterLevelSensor::retrieveData();
     uint32_t touch_val = 0;
     uint8_t trig_section = 0;
 
     for (int i = 0 ; i < 8; i++) {
       if (low_data[i] > 100) {
         touch_val |= 1 << i;
-
       }
     }
     for (int i = 0 ; i < 12; i++) {
@@ -63,14 +70,6 @@ int WaterLevelSensor::getPercentage(){
       trig_section++;
       touch_val >>= 1;
     }
-    return ((int) trig_section * 5);
-}
 
-void WaterLevelSensor::calibrate(){ //Calibration to be used when there is no water
-    for (int i = 0; i < 12; i++) {
-        high_data[i] = 0;
-    }
-    for (int i = 0; i < 8 ; i++) {
-        low_data[i] = 0; // receive a byte as character
-    }
+    return  trig_section*5;
 }
