@@ -79,4 +79,24 @@ La classe a deux constructeurs, ```Pump()``` et ```Pump(uint8_t pin)```, ainsi q
 
 La méthode ```void sendSignal()``` envoie un signal à la pompe en utilisant la broche spécifiée, envoie des signaux HIGH et LOW pour l'activer et la désactiver, respectivement, et utilise le ```timer millis()``` pour contrôler le temps d'exécution de la pompe.
 
+- ```CUSTOMWIFICLIENT```
+
+La classe CustomWiFiClient contient plusieurs attributs privés, à savoir :
+
+```IPaddress``` : une chaîne de caractères représentant l'adresse IP du serveur distant.
+
+```port``` : un entier représentant le port utilisé pour la connexion.
+
+incomingMessage : une chaîne de caractères contenant le dernier message reçu du serveur distant.
+
+incomingSize : un entier représentant la taille du dernier message reçu.
+
+buf : un pointeur vers un tableau de caractères qui est utilisé pour stocker temporairement les données reçues du serveur distant.
+
+Le constructeur de la classe prend en entrée l'adresse IP et le port du serveur distant, et initialise les attributs correspondants. Il crée également un tableau de caractères de taille 3, qui sera utilisé comme buffer pour stocker les données reçues du serveur.
+
+La méthode connectToHost() permet de se connecter au serveur distant en utilisant l'adresse IP et le port spécifiés. Elle effectue une boucle tant que la connexion n'est pas établie, et une fois celle-ci établie, elle envoie un message de confirmation.
+
+La méthode retrieveMessage() permet de récupérer les données envoyées par le serveur distant. Elle lit le buffer de réception et le stocke dans un nouveau tableau de caractères de taille égale à incomingSize, qui est ensuite converti en une chaîne de caractères et retourné. Si aucune donnée n'est disponible, la méthode renvoie une chaîne de caractères "Unavailable".
+
 ### Diagramme de séquence. 
