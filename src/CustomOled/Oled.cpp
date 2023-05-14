@@ -18,15 +18,15 @@ void Oled::diagDraw(void){
 
 }
 
-void Oled::sentenceWrite(string sentence, int maxLen){
-    sentence=Oled::removeSpaces(sentence);
 
+void Oled::sentenceWrite(string sentence, int maxLen, unsigned long speed){
+    
     list<string> sentenceList;
     //Use of STL list library to display on Oled
     int i;
-    for (i=0; i<sentence.size(); i+=maxLen){
+    for (i=0; i<sentence.size(); i++){
 
-        if ((i+maxLen < sentence.size()) && (sentence[i+maxLen+1]!=' ')){
+        if (i+maxLen < sentence.size()){
             sentenceList.push_back(sentence.substr(i, maxLen));
         }
         else{
@@ -42,8 +42,10 @@ void Oled::sentenceWrite(string sentence, int maxLen){
             Oled::setFont(u8g2_font_ncenB10_tr);
             Oled::drawStr(0,24, (*it).c_str());
         } while ( Oled::nextPage() );
-        delay(1000);
+        delay(speed);
     }
+    Oled::clearDisplay();
+
 }
 
 string Oled::removeSpaces(string sentence){
@@ -55,5 +57,5 @@ string Oled::removeSpaces(string sentence){
 
 void Oled::operator<< (const string & sentence)
 {
-    Oled::sentenceWrite(sentence,10);
+    Oled::sentenceWrite(sentence,14,1);
 }

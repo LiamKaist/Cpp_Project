@@ -17,7 +17,7 @@ class Oled: public U8G2_SH1107_SEEED_128X128_1_SW_I2C {
     public:
     Oled(const u8g2_cb_t *r,uint8_t clockie,uint8_t data,uint8_t reset);
     void diagDraw(void);
-    void sentenceWrite(string sentence, int maxLen);
+    void sentenceWrite(string sentence, int maxLen, unsigned long speed);
     void operator << (const string & sentence);
 
 };
