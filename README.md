@@ -10,9 +10,13 @@ Notre projet consiste à concevoir un distributeur automatique d'eau qui permett
 Le système de distributeur automatique d'eau fonctionne de la manière suivante :
 
 1/ L'utilisateur exprime son besoin en enregistrant sa voix via un téléphone portable.
+
 2/ L'enregistrement vocal est envoyé à un ordinateur via une connexion Wi-Fi.
+
 3/ Le système utilise l'API OpenAI GPT pour traiter l'enregistrement vocal et interpréter le besoin de l'utilisateur en traduisant la voix en quantité d'eau à fournir.
+
 4/ L'ordinateur communique la quantité d'eau nécessaire à la carte électronique ESP via une connexion Wi-Fi.
+
 5/ La carte électronique traite l'information et fournit une commande à une pompe pour fournir l'eau dans un gobelet.
 
 ### Schéma de principe du système. 
