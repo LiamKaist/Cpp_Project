@@ -48,9 +48,11 @@ Pompe à eau immergée Lextronic
 La classe Sensor est déclarée dans le fichier Sensor.hpp et a un attribut statique :
 
 ```static int sensorNbr``` : le nombre total de capteurs créés jusqu'à présent.
+
 La classe Sensor est une classe abstraite, ce qui signifie qu'elle a deux méthodes virtuelles pures non implémentées :
 
 ```virtual void displayData()=0``` : affiche les données du capteur.
+
 ```virtual void retrieveData()=0``` : récupère les données du capteur.
 La classe Sensor a un constructeur par défaut, ```Sensor()```, qui incrémente la variable statique sensorNbr chaque fois qu'un objet Sensor est créé.
 
@@ -59,10 +61,15 @@ La classe Sensor a un constructeur par défaut, ```Sensor()```, qui incrémente 
 La classe Pump est déclarée dans le fichier Pump.hpp avec les attributs suivants :
 
 ```uint8_t pin```: le numéro de la broche à laquelle la pompe est connectée.
+
 ```double duration```: la durée d'exécution de la pompe.
+
 ```unsigned long previousMillis```: le temps précédent en millisecondes.
+
 ```unsigned long interval```: l'intervalle de temps en millisecondes.
+
 ```unsigned long currentMillis```: le temps actuel en millisecondes.
+
 La classe a deux constructeurs, ```Pump()``` et ```Pump(uint8_t pin)```, ainsi qu'une méthode ```void sendSignal()```.
 
 La méthode ```void sendSignal()``` envoie un signal à la pompe en utilisant la broche spécifiée, envoie des signaux HIGH et LOW pour l'activer et la désactiver, respectivement, et utilise le ```timer millis()``` pour contrôler le temps d'exécution de la pompe.
