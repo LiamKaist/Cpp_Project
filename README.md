@@ -54,6 +54,7 @@ La classe Sensor est une classe abstraite, ce qui signifie qu'elle a deux métho
 ```virtual void displayData()=0``` : affiche les données du capteur.
 
 ```virtual void retrieveData()=0``` : récupère les données du capteur.
+
 La classe Sensor a un constructeur par défaut, ```Sensor()```, qui incrémente la variable statique sensorNbr chaque fois qu'un objet Sensor est créé.
 
 - ```PUMP```
