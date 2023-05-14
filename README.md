@@ -21,6 +21,7 @@ Le système de distributeur automatique d'eau fonctionne de la manière suivante
 
 ### Schéma de principe du système. 
 
+Schéma de principe.pdf
 
 ## Description technique. 
 
