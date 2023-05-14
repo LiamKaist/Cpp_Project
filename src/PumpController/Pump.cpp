@@ -1,11 +1,8 @@
-#include "Pump.hpp"
+#include <Pump.h>
 
-
-
-#include <Arduino.h>
-#include <iostream>
-
-
+Pump::Pump(){
+    this->pin = 0;
+}
 //Instantiate the pump with its pin , set to OUTPUT Mode
 Pump::Pump(uint8_t pin){
     pinMode(pin,OUTPUT);
@@ -26,6 +23,7 @@ void Pump::sendSignal(unsigned long durationMs){
 }
 
 void Pump::dispenseLiquid(unsigned long volume){
+    //Calculate the duration of the signal to send to the Pump in order to get <volume> millilitres... Approximately
     unsigned long computedDuration = volume*(7250/300);
     Pump::sendSignal(computedDuration);
 }
