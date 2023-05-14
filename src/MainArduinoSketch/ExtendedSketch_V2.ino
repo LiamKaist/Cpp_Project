@@ -7,36 +7,38 @@
 #include <Pump.hpp>
 #include <WaterLevelSensor.h>
 
-//Creating an instance of pump
-Pump* pump1= new Pump(D8);
-//Value to store the input of Pump
+using namespace std;
+using namespace customwificlient;
+
+//Variables Globales
+
 int volume;
-
-//Creating instance of water level sensor
-
-WaterLevelSensor * WLsensor = new WaterLevelSensor();
-
-
-//Global variables
+//Pour se connecter au Wifi
 const char * SSID = "Liam";
 const char *  password= "Liamliam";
-using namespace std;
-string incomingMessage;
+//Pour le client Wifi
 const char * IP ="192.168.234.28";
 string IPaddress = IP;
-list<string> sentenceList;
+string incomingMessage;
 
-// Set your Static IP address & set your Gateway IP address
+// Configuration pour la connexion Wifi
+
 IPAddress local_IP(192, 168, 234, 184);
 IPAddress gateway(192, 168, 234, 1);
 IPAddress subnet(255, 255, 255, 0);
 
+//Socket Client qui tourne sur l'ESP
 
-//Socket Client
-using namespace customwificlient;
 CustomWiFiClient* client1 =new CustomWiFiClient(IPaddress,8080);
 CustomWiFiClient* client2 =new CustomWiFiClient(IPaddress,8081);
-//Oled display
+
+//Creation d'une instance de Pump (Pompe)
+Pump* pump1= new Pump(D8);
+
+//Creation d'une instance de Pump water level sensor
+WaterLevelSensor * WLsensor = new WaterLevelSensor();
+
+//Creation d'une instance Oled
 Oled  oledDisplay(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
 
 void setup() {
@@ -44,11 +46,12 @@ void setup() {
   Serial.println();
   oledDisplay.begin();
 
-  // Configures static IP address
+  // Configuration d'une addresse IP statique pour l'ESP8266
   if (!WiFi.config(local_IP, gateway, subnet)) {
     Serial.println("STA Failed to configure");
   }
   
+  //Connexion au WiFi
   Serial.print("Connecting to WiFi");
   Serial.print(SSID);
   WiFi.begin(SSID,password);
@@ -59,10 +62,13 @@ void setup() {
     delay(500);
     Serial.println(".");
   }
+  //Tentative de calibration du capteur de niveau d'eau lorsque le bac est vide
   WLsensor->calibrate();
 }
 
 void loop() {
+  
+  //Connexion au premier serveur qui contient la donnée renvoyée par ChatGPT
   client1->connectToHost();
   incomingMessage=client1->retrieveMessage();
   if (incomingMessage.size() == 3){
@@ -70,16 +76,21 @@ void loop() {
   }else{
     volume = atoi((incomingMessage.substr(0,3)).c_str());
   }
+  
+  //Affichage de la donnée en mL
   string prefix = "Volume: ";
   oledDisplay<<(prefix + incomingMessage);
-  oledDisplay.clearDisplay();
   if (volume < 400){
+    //Envoi de la commande à la pompe 
     pump1->dispenseLiquid(volume);
   }
+  
+  //Connexion au second serveur contenant la voix transcrite, qui est ensuite récupérée
   client2->connectToHost();
   incomingMessage=client2->retrieveMessage();
   oledDisplay<<incomingMessage;
-  oledDisplay.clearDisplay();
+  
+  //Vérification du niveau d'eau après la commande
   int percentage;
   percentage=WLsensor->getPercentage();
   if (percentage < 10){
