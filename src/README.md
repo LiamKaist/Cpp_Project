@@ -26,4 +26,6 @@ Folder containing a bash script, audio and text files to process the voice and g
 Class for the Pump
 
 # SensorClass
-Abstract class for our sensors (We ended up not needing it)
+Abstract class for our sensors
+
+# WaterLevelSensor
