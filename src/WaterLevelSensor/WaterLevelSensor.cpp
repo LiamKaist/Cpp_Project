@@ -13,8 +13,8 @@ void WaterLevelSensor::begin(TwoWire &I2Cpipe){
 }
 
 WaterLevelSensor::~WaterLevelSensor(){
-  delete low_data;
-  delete high_data;
+  delete[] low_data;
+  delete[] high_data;
 }
 
 
