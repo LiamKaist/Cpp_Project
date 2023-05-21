@@ -38,8 +38,7 @@ Pour ce faire, nous avons utilisé l'API de ChatGPT, ainsi que des classes C++ p
 Nous avons utilisé un téléphone pour l'enregistrement de la voix comme il nous l'a été recommandé.
 
 ### Diagramme de classe. 
-
-![ClassDiagram](https://github.com/LiamKaist/Cpp_Project/assets/117256858/d41fe4f9-1c6c-45c7-9e2b-9e00dedf8be4)
+![image](https://github.com/LiamKaist/Cpp_Project/assets/117256858/e1b2e698-7b17-41bf-90df-cdffe4aef0a8)
 
 La classe U8G2 est une classe récupérée auprès des fournisseurs du module Oled, cette classe fournit un ensemble de méthodes utiles à l'utilisation de l'afficheur.
 
