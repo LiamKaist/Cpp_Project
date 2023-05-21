@@ -115,3 +115,8 @@ Voici un diagramme de sequence de la fonction basique de notre projet, qui est d
 Il y a d'autres fonctionnalités , par exemple ce qu'à dit l'utilisateur peut être affiché à l'écran après avoir été entièrement récupéré auprès d'un second serveur qui dispose de la transcription.
 
 Il y a aussi un niveau d'eau permettant d'alerter à l'utilisateur ou les personnes en charge de la maintenance qu'il n'y a pas assez de liquide pour faire fonctionner le dispositif
+
+
+### Conclusion
+
+Ce projet, bien que limité en temps, a été plutôt interessant et on a remarqué une nette évolution dans nos capacités en C++. On aurait aimé cependant utiliser la classe Hardware controller avec plus de capteurs ou actionneurs et améliorer la rapidité de notre système.
