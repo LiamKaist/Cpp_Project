@@ -122,5 +122,10 @@ Il y a aussi un niveau d'eau permettant d'alerter à l'utilisateur ou les person
 Ce projet, bien que limité en temps, a été plutôt interessant et on a remarqué une nette évolution dans nos capacités en C++. On aurait aimé cependant utiliser la classe Hardware controller avec plus de capteurs ou actionneurs et améliorer la rapidité de notre système.
 
 ### Liens videos
-
+Demonstration pour une personne qui a soif :
 https://youtu.be/GnsYeeqJdHk
+
+Demonstration pour une personne qui a peu soif : 
+https://youtu.be/CeUag9Krt4U
+
+à noter que des améliorations ont été faites depuis le tournage de ces videos, en effet , la boucle arduino ne se bloque pas indefiniment lors de la recherche du server, apres un certain temps , TimeOut est renvoye et affiché à l'écran, pour pouvoir tester chaque serveur et le niveau d'eau periodiquement.
